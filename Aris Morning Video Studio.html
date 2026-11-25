@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aris Morning Video Studio — AI Marketing Provider Wi-Fi</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Fira Code', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace']
+          },
+          colors: {
+            fiber: {
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              900: '#0c4a6e'
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    /* Custom scrollbar & smooth transitions */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(100, 116, 139, 0.35);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(100, 116, 139, 0.55);
+    }
+
+    @keyframes pulseRing {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      70% { transform: scale(1.18); opacity: 0; }
+      100% { transform: scale(1.18); opacity: 0; }
+    }
+    .live-pulse {
+      animation: pulseRing 2s infinite;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-200 min-h-screen antialiased selection:bg-sky-500 selection:text-white">
+
+  <!-- Top Navigation & WIB Clock Header -->
+  <header class="sticky top-0 z-30 border-b border-slate-200/80 dark:border-slate-800/80 bg-white/85 dark:bg-slate-900/85 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-auto min-h-[4rem] py-2.5 flex flex-wrap items-center justify-between gap-3">
+      <!-- Brand / Persona Identity -->
+      <div class="flex items-center gap-3">
+        <div class="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-sky-500 via-cyan-500 to-indigo-600 text-white shadow-lg shadow-sky-500/25">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" />
+          </svg>
+          <span class="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full bg-emerald-400 ring-2 ring-white dark:ring-slate-900"></span>
+        </div>
+        <div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <h1 class="text-base sm:text-lg font-bold tracking-tight text-slate-900 dark:text-white">
+              Aris Morning Video Studio
+            </h1>
+            <span class="inline-flex items-center gap-1 rounded-full bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30 px-2 py-0.5 text-[11px] font-semibold">
+              <span>☀️</span> Rilis Pagi 06:00 WIB
+            </span>
+          </div>
+          <p class="text-xs text-slate-500 dark:text-slate-400">
+            Karyawan AI Digital Marketing Provider Wi-Fi / ISP • Otomatis &amp; Hyper-Local
+          </p>
+        </div>
+      </div>
+
+      <!-- Right Controls: WIB Clock, Schedule Status, Actions, Theme -->
+      <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
+        <!-- Digital WIB Clock & Schedule Indicator -->
+        <div class="flex items-center gap-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100/80 dark:bg-slate-800/70 px-3 py-1.5">
+          <div class="relative flex h-2.5 w-2.5">
+            <span id="schedulePing" class="live-pulse absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span id="scheduleDot" class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+          </div>
+          <div>
+            <div class="flex items-baseline gap-1.5">
+              <span id="wibClock" class="font-mono text-sm font-bold text-slate-900 dark:text-white tracking-wider">00:00:00</span>
+              <span class="text-[10px] font-mono font-semibold uppercase px-1.5 py-0.2 rounded bg-sky-500/15 text-sky-600 dark:text-sky-400">WIB</span>
+            </div>
+            <div id="scheduleCountdown" class="text-[10px] text-slate-500 dark:text-slate-400 leading-tight">
+              Menghitung jadwal 06:00...
+            </div>
+          </div>
+        </div>
+
+        <!-- Simulate 06:00 Release Button -->
+        <button
+          id="btnSimulate0600"
+          type="button"
+          class="inline-flex items-center gap-1.5 rounded-xl bg-amber-500 hover:bg-amber-600 active:scale-[0.99] text-slate-950 font-semibold px-3 py-2 text-xs shadow-sm transition cursor-pointer"
+          title="Simulasikan momen tepat pukul 06:00 WIB pagi"
+        >
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <span>Simulasi Rilis Jam 06:00</span>
+        </button>
+
+        <!-- Generate New Video Now Button -->
+        <button
+          id="btnGenerateNow"
+          type="button"
+          class="inline-flex items-center gap-1.5 rounded-xl bg-sky-600 hover:bg-sky-500 active:scale-[0.99] text-white font-semibold px-3 py-2 text-xs shadow-md shadow-sky-600/20 transition cursor-pointer"
+        >
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+          </svg>
+          <span>Buat Video Baru Sekarang</span>
+        </button>
+
+        <!-- Dark / Light Theme Toggle -->
+        <button
+          id="btnThemeToggle"
+          type="button"
+          aria-label="Ganti Tema Gelap/Terang"
+          class="inline-flex items-center justify-center rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 p-2 transition cursor-pointer"
+          title="Ganti mode terang / gelap"
+        >
+          <svg id="iconSun" class="w-4 h-4 hidden dark:block text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <svg id="iconMoon" class="w-4 h-4 block dark:hidden text-slate-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Toast / Status Banner -->
+  <div id="toastBanner" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 hidden">
+    <div id="toastInner" class="flex items-center justify-between gap-3 rounded-xl border border-emerald-500/30 bg-emerald-500/10 dark:bg-emerald-500/15 px-4 py-2.5 text-xs sm:text-sm text-emerald-900 dark:text-emerald-200">
+      <div class="flex items-center gap-2">
+        <span>⚡</span>
+        <span id="toastMessage">Video pagi Aris siap ditayangkan!</span>
+      </div>
+      <button id="btnCloseToast" type="button" class="text-emerald-700 dark:text-emerald-300 hover:opacity-75 font-bold px-1 cursor-pointer">✕</button>
+    </div>
+  </div>
+
+  <!-- Main Workspace Grid -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+
+    <!-- Top Section: Video Player (Left/Center) + Campaign Settings & Status (Right) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+      <!-- LEFT COLUMN (7 cols): Interactive Wi-Fi Promo Video Player -->
+      <section class="lg:col-span-7 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm overflow-hidden">
+        <!-- Player Top Bar -->
+        <div class="px-4 sm:px-5 py-3.5 border-b border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-2">
+          <div class="flex items-center gap-2 min-w-0">
+            <span class="inline-flex items-center gap-1.5 rounded-md bg-sky-500/15 text-sky-600 dark:text-sky-400 px-2 py-0.5 text-[11px] font-mono font-semibold">
+              <span id="releaseTagBadge">EDISI PAGI 06:00</span>
+            </span>
+            <h2 id="videoTitleDisplay" class="text-sm font-bold text-slate-900 dark:text-white truncate">
+              Promo Wi-Fi Fiber 100 Mbps • Cluster Citra Harmoni
+            </h2>
+          </div>
+
+          <!-- Aspect Ratio Selector + Export Script/Shotlist -->
+          <div class="flex items-center gap-2">
+            <div class="inline-flex rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 p-0.5 text-[11px] font-semibold">
+              <button
+                id="btnRatio916"
+                type="button"
+                class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-900 text-sky-600 dark:text-sky-400 shadow-xs transition cursor-pointer"
+                title="Rasio Vertikal untuk Reels / TikTok / Story"
+              >
+                9:16 Reels
+              </button>
+              <button
+                id="btnRatio169"
+                type="button"
+                class="px-2.5 py-1 rounded-md text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition cursor-pointer"
+                title="Rasio Horizontal untuk Feed / YouTube / FB Group"
+              >
+                16:9 Feed
+              </button>
+            </div>
+
+            <button
+              id="btnExportScript"
+              type="button"
+              class="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 px-2.5 py-1.5 text-[11px] font-semibold text-slate-700 dark:text-slate-200 transition cursor-pointer"
+              title="Unduh Naskah VO, Storyboard, Shotlist & Caption (.txt)"
+            >
+              <svg class="w-3.5 h-3.5 text-sky-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              <span>Unduh Naskah &amp; Shotlist</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Canvas Viewport Container (Adapts between 9:16 and 16:9 cleanly) -->
+        <div class="p-4 sm:p-5 bg-slate-950 flex flex-col items-center justify-center relative">
+          <div id="canvasFrame" class="w-full max-w-[340px] aspect-[9/16] rounded-xl overflow-hidden shadow-2xl border border-slate-800 bg-slate-950 relative transition-all duration-300">
+            <canvas id="promoCanvas" class="w-full h-full block"></canvas>
+
+            <!-- Subtle Top-Left Scene Indicator Pill -->
+            <div class="absolute top-3 left-3 pointer-events-none flex items-center gap-1.5 rounded-full bg-slate-950/75 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-[10px] font-mono text-sky-300">
+              <span class="h-1.5 w-1.5 rounded-full bg-sky-400 animate-pulse"></span>
+              <span id="sceneBadgeText">SCENE 1/4 • KECEPATAN</span>
+            </div>
+
+            <!-- Subtle Top-Right Aris Signature -->
+            <div class="absolute top-3 right-3 pointer-events-none rounded-full bg-slate-950/75 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-[10px] font-medium text-slate-200">
+              AI Aris • 06:00 WIB
+            </div>
+          </div>
+
+          <!-- Scene Quick Jump Pills -->
+          <div id="sceneJumpBar" class="mt-3.5 flex flex-wrap items-center justify-center gap-1.5 w-full">
+            <button data-scene="0" type="button" class="scene-pill px-2.5 py-1 rounded-full text-[11px] font-medium bg-sky-500 text-white transition cursor-pointer">
+              1. Kecepatan &amp; Anti-Lag
+            </button>
+            <button data-scene="1" type="button" class="scene-pill px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition cursor-pointer">
+              2. Promo Bulanan
+            </button>
+            <button data-scene="2" type="button" class="scene-pill px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition cursor-pointer">
+              3. Coverage Area
+            </button>
+            <button data-scene="3" type="button" class="scene-pill px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition cursor-pointer">
+              4. Daftar WA
+            </button>
+          </div>
+        </div>
+
+        <!-- Playback Controls & Timeline Bar -->
+        <div class="px-4 sm:px-5 py-3.5 bg-slate-50 dark:bg-slate-900/90 border-t border-slate-200 dark:border-slate-800 space-y-2.5">
+          <!-- Interactive Scrubber Timeline -->
+          <div class="flex items-center gap-3">
+            <button
+              id="btnPlayPause"
+              type="button"
+              class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-sky-600 hover:bg-sky-500 text-white shadow-sm transition cursor-pointer"
+              aria-label="Putar atau Jeda Video"
+            >
+              <!-- Pause Icon (shown when playing) -->
+              <svg id="iconPause" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M6 5h4v14H6zm8 0h4v14h-4z" />
+              </svg>
+              <!-- Play Icon (shown when paused) -->
+              <svg id="iconPlay" class="w-4 h-4 hidden ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </button>
+
+            <div class="flex-1 space-y-1">
+              <input
+                id="timelineSlider"
+                type="range"
+                min="0"
+                max="24"
+                step="0.1"
+                value="0"
+                class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-sky-500"
+              />
+              <div class="flex items-center justify-between text-[11px] font-mono text-slate-500 dark:text-slate-400">
+                <span id="timeElapsed">00:00</span>
+                <span id="activeSubtitlePreview" class="font-sans text-slate-700 dark:text-slate-200 truncate max-w-[60%] text-center">
+                  Anti-lag &amp; buffering sekeluarga!
+                </span>
+                <span id="timeTotal">00:24</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT COLUMN (5 cols): Wi-Fi Campaign Settings & Aris Briefing -->
+      <section class="lg:col-span-5 space-y-6">
+        <!-- Campaign Settings Form -->
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+            <div>
+              <h2 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <span>📡</span> Pengaturan Kampanye Wi-Fi
+              </h2>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                Perubahan langsung memperbarui video pagi &amp; copywriting Aris.
+              </p>
+            </div>
+            <button
+              id="btnPresetFill"
+              type="button"
+              class="text-[11px] font-semibold text-sky-600 dark:text-sky-400 hover:underline cursor-pointer"
+            >
+              Isi Contoh Promo
+            </button>
+          </div>
+
+          <form id="campaignForm" class="space-y-3.5">
+            <div>
+              <label for="inputBrandPaket" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                Nama Brand / Paket Kecepatan
+              </label>
+              <input
+                id="inputBrandPaket"
+                type="text"
+                value="NusaFiber Home • 100 Mbps Unlimited"
+                class="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-3.5 py-2 text-xs sm:text-sm text-slate-900 dark:text-white focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 outline-none transition"
+                placeholder="Contoh: NusaFiber Home • 100 Mbps Unlimited"
+                required
+              />
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label for="inputHargaPromo" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                  Harga Bulanan &amp; Promo
+                </label>
+                <input
+                  id="inputHargaPromo"
+                  type="text"
+                  value="Rp199rb/bln • Gratis Pasang"
+                  class="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-3.5 py-2 text-xs sm:text-sm text-slate-900 dark:text-white focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 outline-none transition"
+                  placeholder="Contoh: Rp199rb/bln • Gratis Pasang"
+                  required
+                />
+              </div>
+
+              <div>
+                <label for="inputAreaCoverage" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                  Target Area / Perumahan
+                </label>
+                <input
+                  id="inputAreaCoverage"
+                  type="text"
+                  value="Cluster Citra Harmoni &amp; Sekitarnya"
+                  class="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-3.5 py-2 text-xs sm:text-sm text-slate-900 dark:text-white focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 outline-none transition"
+                  placeholder="Contoh: Perumahan Alam Sutera / Kec. Serpong"
+                  required
+                />
+              </div>
+            </div>
+
+            <div>
+              <label for="inputWhatsApp" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                Nomor / Link WhatsApp Registrasi
+              </label>
+              <input
+                id="inputWhatsApp"
+                type="text"
+                value="0812-8899-4411 (wa.me/6281288994411)"
+                class="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 px-3.5 py-2 text-xs sm:text-sm text-slate-900 dark:text-white focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 outline-none transition"
+                placeholder="Contoh: 0812-3456-7890 atau wa.me/6281234567890"
+                required
+              />
+            </div>
+
+            <div class="pt-1 flex items-center gap-2.5">
+              <button
+                type="submit"
+                class="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 dark:bg-sky-600 hover:bg-slate-800 dark:hover:bg-sky-500 text-white font-semibold py-2.5 px-4 text-xs sm:text-sm shadow-sm transition cursor-pointer"
+              >
+                <span>✨ Terapkan &amp; Render Video Pagi</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Aris Morning Briefing Card -->
+        <div class="rounded-2xl border border-sky-500/25 bg-gradient-to-br from-sky-500/10 via-cyan-500/5 to-transparent dark:from-sky-500/15 dark:to-slate-900 p-5 space-y-2.5">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-wider text-sky-700 dark:text-sky-300">
+              Catatan Pagi Aris (06:00 WIB)
+            </span>
+            <span id="lastGeneratedTime" class="text-[11px] font-mono text-slate-500 dark:text-slate-400">
+              Rilis: 06:00 WIB
+            </span>
+          </div>
+          <p id="arisMorningNote" class="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed">
+            "Pagi! Fokus kampanye hari ini kita dorong paket <strong>NusaFiber Home • 100 Mbps Unlimited</strong> untuk warga <strong>Cluster Citra Harmoni &amp; Sekitarnya</strong> dengan highlight anti-lag dan promo <strong>Rp199rb/bln • Gratis Pasang</strong>."
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Bottom Section: Voice-Over Script, 4-Scene Storyboard, Ready Captions & Morning Archive -->
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+      <!-- LEFT/CENTER (8 cols): Tabs for VO Script, 4-Scene Storyboard & Social Captions -->
+      <div class="lg:col-span-8 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm overflow-hidden">
+        <!-- Tab Headers -->
+        <div class="border-b border-slate-200 dark:border-slate-800 px-4 sm:px-6 pt-3 flex items-center gap-2 overflow-x-auto">
+          <button
+            data-tab="storyboard"
+            type="button"
+            class="content-tab px-3.5 py-2.5 text-xs sm:text-sm font-semibold border-b-2 border-sky-500 text-sky-600 dark:text-sky-400 whitespace-nowrap transition cursor-pointer"
+          >
+            🎬 Storyboard 4-Scene &amp; VO
+          </button>
+          <button
+            data-tab="captions"
+            type="button"
+            class="content-tab px-3.5 py-2.5 text-xs sm:text-sm font-semibold border-b-2 border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 whitespace-nowrap transition cursor-pointer"
+          >
+            📱 Caption Medsos Siap Salin
+          </button>
+          <button
+            data-tab="vo-full"
+            type="button"
+            class="content-tab px-3.5 py-2.5 text-xs sm:text-sm font-semibold border-b-2 border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 whitespace-nowrap transition cursor-pointer"
+          >
+            🎙️ Naskah Voice-Over Lengkap
+          </button>
+        </div>
+
+        <!-- Tab 1: 4-Scene Storyboard & VO -->
+        <div id="tab-storyboard" class="tab-panel p-4 sm:p-6 space-y-4">
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <div>
+              <h3 class="text-sm font-bold text-slate-900 dark:text-white">Storyboard Otomatis 4-Scene (Durasi 24 Detik)</h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Klik "Putar Scene" untuk melompat langsung ke adegan tersebut di kanvas video.</p>
+            </div>
+          </div>
+
+          <div id="storyboardList" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Populated dynamically by JS -->
+          </div>
+        </div>
+
+        <!-- Tab 2: Ready-to-Copy Social Media Captions (FB, IG, WA) -->
+        <div id="tab-captions" class="tab-panel hidden p-4 sm:p-6 space-y-4">
+          <div>
+            <h3 class="text-sm font-bold text-slate-900 dark:text-white">Caption Siap Posting (Facebook, Instagram &amp; WhatsApp)</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Disusun khusus oleh Aris sesuai area coverage dan promo aktif.</p>
+          </div>
+
+          <div id="captionsList" class="space-y-4">
+            <!-- Populated dynamically by JS -->
+          </div>
+        </div>
+
+        <!-- Tab 3: Full Voice-Over Script -->
+        <div id="tab-vo-full" class="tab-panel hidden p-4 sm:p-6 space-y-4">
+          <div class="flex items-center justify-between gap-2 flex-wrap">
+            <div>
+              <h3 class="text-sm font-bold text-slate-900 dark:text-white">Naskah Voice-Over (VO) Lengkap</h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Siap direkam atau dimasukkan ke text-to-speech / presenter AI.</p>
+            </div>
+            <button
+              id="btnCopyFullVO"
+              type="button"
+              class="inline-flex items-center gap-1.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white px-3 py-1.5 text-xs font-semibold transition cursor-pointer"
+            >
+              <span>📋 Salin Naskah VO</span>
+            </button>
+          </div>
+          <div id="fullVoBox" class="rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-4 text-xs sm:text-sm leading-relaxed text-slate-700 dark:text-slate-200 whitespace-pre-line font-normal">
+            <!-- Populated dynamically by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT (4 cols): Morning Video Archive -->
+      <aside class="lg:col-span-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+          <div>
+            <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+              <span>🗂️</span> Arsip Video Pagi
+            </h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Riwayat rilis pagi 06:00 WIB &amp; render manual.</p>
+          </div>
+          <span id="archiveCountBadge" class="rounded-full bg-slate-100 dark:bg-slate-800 px-2.5 py-0.5 text-[11px] font-mono font-semibold text-slate-600 dark:text-slate-300">
+            0 Video
+          </span>
+        </div>
+
+        <div id="archiveList" class="space-y-3 max-h-[520px] overflow-y-auto pr-1">
+          <!-- Populated dynamically by JS -->
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      "use strict";
+
+      // ==========================================
+      // 1. THEME INITIALIZATION & TOGGLE
+      // ==========================================
+      const htmlEl = document.documentElement;
+      const btnThemeToggle = document.getElementById("btnThemeToggle");
+
+      function initTheme() {
+        const saved = localStorage.getItem("aris_theme");
+        if (saved === "light") {
+          htmlEl.classList.remove("dark");
+        } else if (saved === "dark") {
+          htmlEl.classList.add("dark");
+        } else {
+          // Default to dark mode for studio aesthetic, or follow system
+          htmlEl.classList.add("dark");
+        }
+      }
+
+      btnThemeToggle.addEventListener("click", () => {
+        htmlEl.classList.toggle("dark");
+        const isDark = htmlEl.classList.contains("dark");
+        localStorage.setItem("aris_theme", isDark ? "dark" : "light");
+      });
+
+      initTheme();
+
+      // ==========================================
+      // 2. STATE & CAMPAIGN MODEL
+      // ==========================================
+      const TOTAL_DURATION = 24; // seconds (4 scenes x 6s each)
+      const SCENE_DURATION = 6;
+
+      const state = {
+        brandPaket: "NusaFiber Home • 100 Mbps Unlimited",
+        hargaPromo: "Rp199rb/bln • Gratis Pasang",
+        areaCoverage: "Cluster Citra Harmoni & Sekitarnya",
+        whatsapp: "0812-8899-4411 (wa.me/6281288994411)",
+        aspectRatio: "9:16", // '9:16' | '16:9'
+        isPlaying: true,
+        elapsed: 0,
+        releaseLabel: "Rilis Pagi 06:00 WIB",
+        generatedAt: "06:00 WIB",
+        archive: []
+      };
+
+      const PRESET_SAMPLES = [
+        {
+          brandPaket: "NusaFiber Home • 100 Mbps Unlimited",
+          hargaPromo: "Rp199rb/bln • Gratis Pasang",
+          areaCoverage: "Cluster Citra Harmoni & Sekitarnya",
+          whatsapp: "0812-8899-4411 (wa.me/6281288994411)"
+        },
+        {
+          brandPaket: "WusNet Fiber • 200 Mbps Gaming & WFH",
+          hargaPromo: "Rp265rb/bln • Diskon 3 Bulan",
+          areaCoverage: "Perumahan Graha Asri & Jl. Merdeka",
+          whatsapp: "0857-9012-3344 (wa.me/6285790123344)"
+        },
+        {
+          brandPaket: "KoneksiKita • 50 Mbps Keluarga Hemat",
+          hargaPromo: "Rp155rb/bln • Free Router Wi-Fi 6",
+          areaCoverage: "Komplek Permata Indah & Kec. Ciputat",
+          whatsapp: "0813-7744-2211 (wa.me/6281377442211)"
+        }
+      ];
+      let presetIdx = 0;
+
+      // Extract clean WA number/link for display
+      function getCleanWaDisplay(waRaw) {
+        return waRaw.trim() || "0812-0000-0000";
+      }
+
+      // Build 4-Scene Storyboard, Shotlist, VO & Captions dynamically from campaign state
+      function buildCampaignPackage() {
+        const { brandPaket, hargaPromo, areaCoverage, whatsapp } = state;
+        const waClean = getCleanWaDisplay(whatsapp);
+
+        const scenes = [
+          {
+            index: 0,
+            timeRange: "00:00 - 00:06",
+            tag: "SCENE 1/4 • KECEPATAN",
+            badgeTitle: "KECEPATAN & ANTI-LAG",
+            headline: "ANTI-LAG & BUFFERING!",
+            subheadline: `${brandPaket}`,
+            metricLabel: "PING & SPEEDTEST",
+            metricValue: "100 Mbps • 4ms Ping",
+            subtitle: `Nonton 4K, meeting, & mabar tanpa buffering bareng ${brandPaket}.`,
+            shotlist: "Motion graphic speedometer fiber optic naik ke 100 Mbps + indikator ping stabil rendah (4ms) & notifikasi anti-buffering.",
+            vo: `Pagi warga ${areaCoverage}! Masih sering kena buffering atau lag pas lagi sibuk? Saatnya beralih ke ${brandPaket} yang stabil seharian penuh.`
+          },
+          {
+            index: 1,
+            timeRange: "00:06 - 00:12",
+            tag: "SCENE 2/4 • PROMO BULANAN",
+            badgeTitle: "PROMO SPESIAL BULAN INI",
+            headline: hargaPromo,
+            subheadline: "Tanpa FUP Mencekik • Tagihan Jelas",
+            metricLabel: "PENAWARAN TERBATAS",
+            metricValue: "HEMAT S/D 35%",
+            subtitle: `Paket bulanan super hemat: ${hargaPromo}.`,
+            shotlist: "Kartu promo bulanan muncul dengan efek highlight harga mencolok, badge GRATIS PASANG, dan checklist benefit transparan.",
+            vo: `Kabar baiknya, khusus promo bulan ini kamu bisa pasang dengan penawaran ${hargaPromo}. Satu koneksi kencang buat rame-rame di rumah.`
+          },
+          {
+            index: 2,
+            timeRange: "00:12 - 00:18",
+            tag: "SCENE 3/4 • COVERAGE AREA",
+            badgeTitle: "JARINGAN TERCOVER",
+            headline: areaCoverage,
+            subheadline: "Jalur Tiang & Fiber Sudah Aktif",
+            metricLabel: "STATUS COVERAGE",
+            metricValue: "READY INSTALASI",
+            subtitle: `Jaringan aktif di ${areaCoverage} — cek titik rumahmu sekarang!`,
+            shotlist: "Radar peta coverage area berdenyut pada titik lokasi perumahan dengan pin lokasi aktif dan indikator siap pasang.",
+            vo: `Jaringan fiber kami sudah ter-cover di area ${areaCoverage}. Tim teknisi siap bantu cek titik lokasi rumah kamu hari ini juga.`
+          },
+          {
+            index: 3,
+            timeRange: "00:18 - 00:24",
+            tag: "SCENE 4/4 • DAFTAR WA",
+            badgeTitle: "REGISTRASI CEPAT",
+            headline: "DAFTAR VIA WHATSAPP",
+            subheadline: waClean,
+            metricLabel: "SLOT PROMO TERBATAS",
+            metricValue: "FAST RESPONSE WA",
+            subtitle: `Amankan slot promo via WhatsApp: ${waClean}.`,
+            shotlist: "Tombol CTA WhatsApp berdenyut halus menampilkan nomor/link registrasi serta instruksi kirim shareloc untuk cek coverage.",
+            vo: `Jangan sampai kehabisan slot promo! Langsung hubungi kami di WhatsApp ${waClean} untuk cek coverage dan jadwalkan pemasangan.`
+          }
+        ];
+
+        const captions = [
+          {
+            platform: "Facebook Group / Komunitas Warga",
+            badge: "Hyper-Local",
+            text: `Pagi warga ${areaCoverage}! ☀️📶\n\nMasih sering kesel internet di rumah lemot pas jam sibuk atau mabar? Jaringan ${brandPaket} sudah hadir & siap terpasang di area ${areaCoverage}.\n\n✨ Keunggulan:\n• Koneksi fiber stabil anti-lag & minim buffering\n• Promo spesial: ${hargaPromo}\n• Teknisi siap bantu cek lokasi rumah kamu\n\nSlot promo bulan ini terbatas! Mau cek apakah rumahmu sudah ter-cover?\n📲 Chat / WA sekarang ke: ${waClean}\n\n#WiFiRumahan #InternetCepat #PromoWiFi #${areaCoverage.replace(/[^a-zA-Z0-9]/g, "")}`
+          },
+          {
+            platform: "Instagram / TikTok Reels",
+            badge: "Video 9:16",
+            text: `Stop drama buffering di rumah! 🚀⚡\n\nNikmati internet kencang *${brandPaket}* khusus area *${areaCoverage}* dengan promo *${hargaPromo}*.\n\nCocok banget buat WFH, kelas online, streaming film, sampai gaming bareng keluarga tanpa khawatir kuota cepat habis.\n\n👇 Klik / hubungi WhatsApp registrasi:\n${waClean}\n\n#InfoWiFi #FiberOptic #InternetUnlimited #PromoBulanIni`
+          },
+          {
+            platform: "WhatsApp Broadcast / Status",
+            badge: "Direct Closing",
+            text: `🚨 *INFO COVERAGE & PROMO PAGI INI* 🚨\n\nHalo Kak! Khusus area *${areaCoverage}*, tersedia promo pasang Wi-Fi *${brandPaket}*:\n👉 *${hargaPromo}*\n\nCukup kirimkan *Share Location* atau alamat lengkap ke WhatsApp ini untuk langsung kami cek ketersediaan jaringannya ya Kak.\n\nHubungi: ${waClean}`
+          }
+        ];
+
+        const fullVO = scenes
+          .map((s, i) => `[Scene ${i + 1} • ${s.timeRange}]\n${s.vo}`)
+          .join("\n\n");
+
+        const exportText = [
+          "==========================================================",
+          "ARIS MORNING VIDEO STUDIO — NASKAH & SHOTLIST PROMOSI WI-FI",
+          "==========================================================",
+          `Jadwal Rilis   : ${state.releaseLabel} (${state.generatedAt})`,
+          `Brand / Paket  : ${brandPaket}`,
+          `Harga & Promo  : ${hargaPromo}`,
+          `Target Area    : ${areaCoverage}`,
+          `Kontak WA      : ${waClean}`,
+          `Rasio Video    : ${state.aspectRatio}`,
+          `Durasi Total   : ${TOTAL_DURATION} Detik (4 Scene x ${SCENE_DURATION} Detik)`,
+          "==========================================================",
+          "",
+          "--- STORYBOARD & SHOTLIST ---",
+          ...scenes.map(
+            (s, idx) =>
+              `\nScene ${idx + 1} (${s.timeRange}) — ${s.badgeTitle}\n• Visual / Shotlist : ${s.shotlist}\n• Teks Layar        : ${s.headline} | ${s.subheadline}\n• Voice-Over (VO)   : "${s.vo}"`
+          ),
+          "",
+          "\n--- NASKAH VOICE-OVER LENGKAP ---",
+          "",
+          fullVO,
+          "",
+          "\n--- CAPTION MEDSOS SIAP SALIN ---",
+          ...captions.map((c) => `\n[${c.platform}]\n${c.text}`)
+        ].join("\n");
+
+        return { scenes, captions, fullVO, exportText };
+      }
+
+      let currentPackage = buildCampaignPackage();
+
+      // ==========================================
+      // 3. UI RENDERING FOR TABS, ARCHIVE & BRIEF
+      // ==========================================
+      const toastBanner = document.getElementById("toastBanner");
+      const toastMessage = document.getElementById("toastMessage");
+      const btnCloseToast = document.getElementById("btnCloseToast");
+
+      function showToast(msg) {
+        toastMessage.textContent = msg;
+        toastBanner.classList.remove("hidden");
+      }
+
+      btnCloseToast.addEventListener("click", () => {
+        toastBanner.classList.add("hidden");
+      });
+
+      function copyToClipboard(text, label = "Teks") {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(() => {
+            showToast(`${label} berhasil disalin ke clipboard!`);
+          }).catch(() => {
+            fallbackCopy(text, label);
+          });
+        } else {
+          fallbackCopy(text, label);
+        }
+      }
+
+      function fallbackCopy(text, label) {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+          document.execCommand("copy");
+          showToast(`${label} berhasil disalin ke clipboard!`);
+        } catch (err) {
+          showToast("Gagal menyalin otomatis. Silakan salin manual.");
+        }
+        document.body.removeChild(ta);
+      }
+
+      function renderContentSections() {
+        currentPackage = buildCampaignPackage();
+        const { scenes, captions, fullVO } = currentPackage;
+
+        // Update Top Video Title & Morning Note
+        document.getElementById("videoTitleDisplay").textContent =
+          `${state.brandPaket} • ${state.areaCoverage}`;
+        document.getElementById("releaseTagBadge").textContent =
+          `${state.releaseLabel.toUpperCase()} • ${state.generatedAt}`;
+        document.getElementById("lastGeneratedTime").textContent =
+          `Rilis: ${state.generatedAt}`;
+
+        document.getElementById("arisMorningNote").innerHTML =
+          `"Pagi! Fokus kampanye hari ini kita dorong paket <strong>${escapeHtml(state.brandPaket)}</strong> untuk warga <strong>${escapeHtml(state.areaCoverage)}</strong> dengan highlight anti-lag dan promo <strong>${escapeHtml(state.hargaPromo)}</strong>."`;
+
+        // Render 4-Scene Storyboard Cards
+        const storyboardList = document.getElementById("storyboardList");
+        storyboardList.innerHTML = scenes.map((sc, idx) => `
+          <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-950/60 p-4 flex flex-col justify-between gap-3">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between gap-2">
+                <span class="inline-flex items-center gap-1.5 rounded-md bg-sky-500/15 text-sky-600 dark:text-sky-400 px-2 py-0.5 text-[11px] font-mono font-bold">
+                  SCENE ${idx + 1} • ${sc.timeRange}
+                </span>
+                <button
+                  type="button"
+                  data-jump-scene="${idx}"
+                  class="btn-jump-scene text-[11px] font-semibold text-sky-600 dark:text-sky-400 hover:underline cursor-pointer"
+                >
+                  ▶ Putar Scene
+                </button>
+              </div>
+              <div class="text-xs font-bold text-slate-900 dark:text-white">${escapeHtml(sc.badgeTitle)}: ${escapeHtml(sc.headline)}</div>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">
+                <strong class="text-slate-700 dark:text-slate-300">Shotlist:</strong> ${escapeHtml(sc.shotlist)}
+              </p>
+              <p class="text-xs text-slate-700 dark:text-slate-200 leading-relaxed bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-lg p-2.5">
+                <strong class="text-sky-600 dark:text-sky-400">VO:</strong> "${escapeHtml(sc.vo)}"
+              </p>
+            </div>
+          </div>
+        `).join("");
+
+        // Attach jump-to-scene listeners
+        storyboardList.querySelectorAll(".btn-jump-scene").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const sIdx = Number(btn.getAttribute("data-jump-scene"));
+            state.elapsed = sIdx * SCENE_DURATION + 0.1;
+            state.isPlaying = true;
+            updatePlayPauseIcons();
+            syncCanvasSize();
+          });
+        });
+
+        // Render Captions Cards
+        const captionsList = document.getElementById("captionsList");
+        captionsList.innerHTML = captions.map((cap, idx) => `
+          <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-950/60 p-4 space-y-2.5">
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-bold text-slate-900 dark:text-white">${escapeHtml(cap.platform)}</span>
+                <span class="rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-2 py-0.5 text-[10px] font-semibold">
+                  ${escapeHtml(cap.badge)}
+                </span>
+              </div>
+              <button
+                type="button"
+                data-copy-caption="${idx}"
+                class="btn-copy-caption inline-flex items-center gap-1 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 px-2.5 py-1 text-[11px] font-semibold text-slate-700 dark:text-slate-200 transition cursor-pointer"
+              >
+                <span>📋 Salin</span>
+              </button>
+            </div>
+            <pre class="whitespace-pre-wrap font-sans text-xs text-slate-700 dark:text-slate-200 leading-relaxed bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-lg p-3">${escapeHtml(cap.text)}</pre>
+          </div>
+        `).join("");
+
+        captionsList.querySelectorAll(".btn-copy-caption").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const cIdx = Number(btn.getAttribute("data-copy-caption"));
+            copyToClipboard(captions[cIdx].text, `Caption ${captions[cIdx].platform}`);
+          });
+        });
+
+        // Render Full VO Box
+        document.getElementById("fullVoBox").textContent = fullVO;
+      }
+
+      document.getElementById("btnCopyFullVO").addEventListener("click", () => {
+        copyToClipboard(currentPackage.fullVO, "Naskah Voice-Over Lengkap");
+      });
+
+      // Content Tabs Switching
+      const tabButtons = document.querySelectorAll(".content-tab");
+      const tabPanels = document.querySelectorAll(".tab-panel");
+
+      tabButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const target = btn.getAttribute("data-tab");
+
+          tabButtons.forEach((b) => {
+            b.classList.remove("border-sky-500", "text-sky-600", "dark:text-sky-400");
+            b.classList.add("border-transparent", "text-slate-500", "dark:text-slate-400");
+          });
+          btn.classList.remove("border-transparent", "text-slate-500", "dark:text-slate-400");
+          btn.classList.add("border-sky-500", "text-sky-600", "dark:text-sky-400");
+
+          tabPanels.forEach((panel) => {
+            panel.classList.add("hidden");
+          });
+          document.getElementById(`tab-${target}`).classList.remove("hidden");
+        });
+      });
+
+      // ==========================================
+      // 4. ARCHIVE MANAGEMENT
+      // ==========================================
+      function pushToArchive(sourceLabel, timeLabel) {
+        const entry = {
+          id: Date.now() + Math.random(),
+          sourceLabel,
+          timeLabel,
+          brandPaket: state.brandPaket,
+          hargaPromo: state.hargaPromo,
+          areaCoverage: state.areaCoverage,
+          whatsapp: state.whatsapp,
+          aspectRatio: state.aspectRatio
+        };
+        state.archive.unshift(entry);
+        if (state.archive.length > 10) {
+          state.archive.pop();
+        }
+        renderArchive();
+      }
+
+      function renderArchive() {
+        const archiveList = document.getElementById("archiveList");
+        const countBadge = document.getElementById("archiveCountBadge");
+        countBadge.textContent = `${state.archive.length} Video`;
+
+        if (state.archive.length === 0) {
+          archiveList.innerHTML = `<p class="text-xs text-slate-400">Belum ada arsip video.</p>`;
+          return;
+        }
+
+        archiveList.innerHTML = state.archive.map((item) => `
+          <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-950/60 p-3.5 space-y-2">
+            <div class="flex items-center justify-between gap-2">
+              <span class="inline-flex items-center gap-1 rounded-md bg-amber-500/15 text-amber-700 dark:text-amber-300 px-2 py-0.5 text-[10px] font-mono font-bold">
+                ${escapeHtml(item.timeLabel)}
+              </span>
+              <span class="text-[10px] font-semibold text-slate-400">${escapeHtml(item.sourceLabel)}</span>
+            </div>
+            <div class="text-xs font-bold text-slate-900 dark:text-white leading-snug">
+              ${escapeHtml(item.brandPaket)}
+            </div>
+            <div class="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-1">
+              📍 ${escapeHtml(item.areaCoverage)} • ${escapeHtml(item.hargaPromo)}
+            </div>
+            <button
+              type="button"
+              data-archive-id="${item.id}"
+              class="btn-load-archive w-full mt-1 inline-flex items-center justify-center gap-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 hover:bg-sky-50 dark:hover:bg-sky-950/40 hover:border-sky-400 text-slate-700 dark:text-slate-200 py-1.5 text-[11px] font-semibold transition cursor-pointer"
+            >
+              <span>▶ Muat &amp; Putar Video Ini</span>
+            </button>
+          </div>
+        `).join("");
+
+        archiveList.querySelectorAll(".btn-load-archive").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const id = Number(btn.getAttribute("data-archive-id"));
+            const found = state.archive.find((a) => a.id === id);
+            if (!found) return;
+
+            state.brandPaket = found.brandPaket;
+            state.hargaPromo = found.hargaPromo;
+            state.areaCoverage = found.areaCoverage;
+            state.whatsapp = found.whatsapp;
+            state.releaseLabel = found.sourceLabel;
+            state.generatedAt = found.timeLabel;
+            state.elapsed = 0;
+            state.isPlaying = true;
+
+            // Sync form inputs
+            document.getElementById("inputBrandPaket").value = state.brandPaket;
+            document.getElementById("inputHargaPromo").value = state.hargaPromo;
+            document.getElementById("inputAreaCoverage").value = state.areaCoverage;
+            document.getElementById("inputWhatsApp").value = state.whatsapp;
+
+            setAspectRatio(found.aspectRatio || state.aspectRatio);
+            updatePlayPauseIcons();
+            renderContentSections();
+            showToast(`Memuat arsip video: ${state.brandPaket}`);
+          });
+        });
+      }
+
+      // Seed initial morning archive items
+      pushToArchive("Rilis Pagi 06:00 WIB", "06:00 WIB (Hari Ini)");
+      pushToArchive("Rilis Pagi 06:00 WIB", "06:00 WIB (Kemarin)");
+
+      // ==========================================
+      // 5. FORM, PRESETS, EXPORT & SCHEDULE ACTIONS
+      // ==========================================
+      const campaignForm = document.getElementById("campaignForm");
+      campaignForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        state.brandPaket = document.getElementById("inputBrandPaket").value.trim() || state.brandPaket;
+        state.hargaPromo = document.getElementById("inputHargaPromo").value.trim() || state.hargaPromo;
+        state.areaCoverage = document.getElementById("inputAreaCoverage").value.trim() || state.areaCoverage;
+        state.whatsapp = document.getElementById("inputWhatsApp").value.trim() || state.whatsapp;
+        state.releaseLabel = "Render Kampanye Baru";
+        state.generatedAt = formatCurrentWibHM();
+        state.elapsed = 0;
+        state.isPlaying = true;
+
+        updatePlayPauseIcons();
+        renderContentSections();
+        pushToArchive("Render Manual", state.generatedAt);
+        showToast("Video promosi & naskah Aris berhasil diperbarui!");
+      });
+
+      document.getElementById("btnPresetFill").addEventListener("click", () => {
+        presetIdx = (presetIdx + 1) % PRESET_SAMPLES.length;
+        const sample = PRESET_SAMPLES[presetIdx];
+        document.getElementById("inputBrandPaket").value = sample.brandPaket;
+        document.getElementById("inputHargaPromo").value = sample.hargaPromo;
+        document.getElementById("inputAreaCoverage").value = sample.areaCoverage;
+        document.getElementById("inputWhatsApp").value = sample.whatsapp;
+
+        state.brandPaket = sample.brandPaket;
+        state.hargaPromo = sample.hargaPromo;
+        state.areaCoverage = sample.areaCoverage;
+        state.whatsapp = sample.whatsapp;
+        state.elapsed = 0;
+        renderContentSections();
+        showToast(`Preset kampanye diterapkan: ${sample.brandPaket}`);
+      });
+
+      // Simulate 06:00 WIB Morning Release
+      document.getElementById("btnSimulate0600").addEventListener("click", () => {
+        state.brandPaket = document.getElementById("inputBrandPaket").value.trim() || state.brandPaket;
+        state.hargaPromo = document.getElementById("inputHargaPromo").value.trim() || state.hargaPromo;
+        state.areaCoverage = document.getElementById("inputAreaCoverage").value.trim() || state.areaCoverage;
+        state.whatsapp = document.getElementById("inputWhatsApp").value.trim() || state.whatsapp;
+
+        state.releaseLabel = "Rilis Pagi 06:00 WIB";
+        state.generatedAt = "06:00 WIB";
+        state.elapsed = 0;
+        state.isPlaying = true;
+
+        updatePlayPauseIcons();
+        renderContentSections();
+        pushToArchive("Simulasi 06:00 WIB", "06:00 WIB");
+        showToast("☀️ Simulasi Rilis Pagi 06:00 WIB! Video pagi Aris otomatis tayang & tersimpan ke arsip.");
+      });
+
+      // Generate New Video Now
+      document.getElementById("btnGenerateNow").addEventListener("click", () => {
+        state.brandPaket = document.getElementById("inputBrandPaket").value.trim() || state.brandPaket;
+        state.hargaPromo = document.getElementById("inputHargaPromo").value.trim() || state.hargaPromo;
+        state.areaCoverage = document.getElementById("inputAreaCoverage").value.trim() || state.areaCoverage;
+        state.whatsapp = document.getElementById("inputWhatsApp").value.trim() || state.whatsapp;
+
+        state.releaseLabel = "Rilis Instan Aris";
+        state.generatedAt = formatCurrentWibHM();
+        state.elapsed = 0;
+        state.isPlaying = true;
+
+        updatePlayPauseIcons();
+        renderContentSections();
+        pushToArchive("Rilis Instan", state.generatedAt);
+        showToast(`🎬 Video promosi baru dibuat oleh Aris (${state.generatedAt})!`);
+      });
+
+      // Export / Download Script & Shotlist (.txt)
+      document.getElementById("btnExportScript").addEventListener("click", () => {
+        currentPackage = buildCampaignPackage();
+        const slug = state.brandPaket
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-|-$/g, "") || "promo-wifi";
+        const filename = `aris-naskah-shotlist-${slug}.txt`;
+        const blob = new Blob([currentPackage.exportText], { type: "text/plain;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast(`Naskah & shotlist diunduh (${filename}).`);
+      });
+
+      // ==========================================
+      // 6. WIB CLOCK & 06:00 SCHEDULE COUNTDOWN
+      // ==========================================
+      const wibClockEl = document.getElementById("wibClock");
+      const scheduleCountdownEl = document.getElementById("scheduleCountdown");
+
+      function getWibParts() {
+        const now = new Date();
+        // Format in Asia/Jakarta (WIB = UTC+7)
+        const parts = new Intl.DateTimeFormat("en-GB", {
+          timeZone: "Asia/Jakarta",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: false
+        }).formatToParts(now);
+
+        const h = Number(parts.find((p) => p.type === "hour").value);
+        const m = Number(parts.find((p) => p.type === "minute").value);
+        const s = Number(parts.find((p) => p.type === "second").value);
+        return { h, m, s };
+      }
+
+      function formatCurrentWibHM() {
+        const { h, m } = getWibParts();
+        return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")} WIB`;
+      }
+
+      function updateClockAndSchedule() {
+        const { h, m, s } = getWibParts();
+        wibClockEl.textContent =
+          `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+
+        // Seconds since midnight WIB
+        const nowSec = h * 3600 + m * 60 + s;
+        // 06:00:00 WIB = 21600 seconds
+        const targetSec = 6 * 3600;
+        let diffSec = targetSec - nowSec;
+        if (diffSec <= 0) {
+          diffSec += 24 * 3600;
+        }
+
+        const remH = Math.floor(diffSec / 3600);
+        const remM = Math.floor((diffSec % 3600) / 60);
+        const remS = diffSec % 60;
+
+        if (h === 6 && m === 0) {
+          scheduleCountdownEl.textContent = "SEDANG RILIS PAGI 06:00 WIB!";
+        } else {
+          scheduleCountdownEl.textContent =
+            `Rilis 06:00 dalam ${remH}j ${String(remM).padStart(2, "0")}m ${String(remS).padStart(2, "0")}d`;
+        }
+      }
+
+      updateClockAndSchedule();
+      setInterval(updateClockAndSchedule, 1000);
+
+      // ==========================================
+      // 7. VIDEO PLAYER, ASPECT RATIO & MOTION CANVAS
+      // ==========================================
+      const canvas = document.getElementById("promoCanvas");
+      const ctx = canvas.getContext("2d");
+      const canvasFrame = document.getElementById("canvasFrame");
+      const btnPlayPause = document.getElementById("btnPlayPause");
+      const iconPlay = document.getElementById("iconPlay");
+      const iconPause = document.getElementById("iconPause");
+      const timelineSlider = document.getElementById("timelineSlider");
+      const timeElapsedEl = document.getElementById("timeElapsed");
+      const timeTotalEl = document.getElementById("timeTotal");
+      const sceneBadgeText = document.getElementById("sceneBadgeText");
+      const activeSubtitlePreview = document.getElementById("activeSubtitlePreview");
+      const btnRatio916 = document.getElementById("btnRatio916");
+      const btnRatio169 = document.getElementById("btnRatio169");
+      const scenePills = document.querySelectorAll(".scene-pill");
+
+      timeTotalEl.textContent = formatSeconds(TOTAL_DURATION);
+
+      function formatSeconds(sec) {
+        const clamped = Math.max(0, Math.min(TOTAL_DURATION, Math.floor(sec)));
+        const m = Math.floor(clamped / 60);
+        const s = clamped % 60;
+        return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+      }
+
+      function updatePlayPauseIcons() {
+        if (state.isPlaying) {
+          iconPlay.classList.add("hidden");
+          iconPause.classList.remove("hidden");
+        } else {
+          iconPlay.classList.remove("hidden");
+          iconPause.classList.add("hidden");
+        }
+      }
+
+      btnPlayPause.addEventListener("click", () => {
+        state.isPlaying = !state.isPlaying;
+        updatePlayPauseIcons();
+      });
+
+      timelineSlider.addEventListener("input", (e) => {
+        state.elapsed = Number(e.target.value);
+      });
+
+      scenePills.forEach((pill) => {
+        pill.addEventListener("click", () => {
+          const idx = Number(pill.getAttribute("data-scene"));
+          state.elapsed = idx * SCENE_DURATION + 0.1;
+          state.isPlaying = true;
+          updatePlayPauseIcons();
+        });
+      });
+
+      function setAspectRatio(ratio) {
+        state.aspectRatio = ratio;
+        if (ratio === "9:16") {
+          canvasFrame.className =
+            "w-full max-w-[340px] aspect-[9/16] rounded-xl overflow-hidden shadow-2xl border border-slate-800 bg-slate-950 relative transition-all duration-300";
+          btnRatio916.className =
+            "px-2.5 py-1 rounded-md bg-white dark:bg-slate-900 text-sky-600 dark:text-sky-400 shadow-xs transition cursor-pointer";
+          btnRatio169.className =
+            "px-2.5 py-1 rounded-md text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition cursor-pointer";
+        } else {
+          canvasFrame.className =
+            "w-full max-w-[640px] aspect-video rounded-xl overflow-hidden shadow-2xl border border-slate-800 bg-slate-950 relative transition-all duration-300";
+          btnRatio169.className =
+            "px-2.5 py-1 rounded-md bg-white dark:bg-slate-900 text-sky-600 dark:text-sky-400 shadow-xs transition cursor-pointer";
+          btnRatio916.className =
+            "px-2.5 py-1 rounded-md text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition cursor-pointer";
+        }
+        // Resize canvas after layout transition
+        setTimeout(syncCanvasSize, 40);
+        setTimeout(syncCanvasSize, 320);
+      }
+
+      btnRatio916.addEventListener("click", () => setAspectRatio("9:16"));
+      btnRatio169.addEventListener("click", () => setAspectRatio("16:9"));
+
+      function syncCanvasSize() {
+        const rect = canvas.getBoundingClientRect();
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const w = Math.max(240, Math.round(rect.width * dpr));
+        const h = Math.max(180, Math.round(rect.height * dpr));
+        if (canvas.width !== w || canvas.height !== h) {
+          canvas.width = w;
+          canvas.height = h;
+        }
+      }
+
+      window.addEventListener("resize", syncCanvasSize);
+      syncCanvasSize();
+
+      // Helper to wrap text cleanly inside canvas
+      function drawWrappedText(text, x, y, maxWidth, lineHeight) {
+        const words = String(text).split(" ");
+        let line = "";
+        let currY = y;
+        for (let n = 0; n < words.length; n++) {
+          const testLine = line + words[n] + " ";
+          const metrics = ctx.measureText(testLine);
+          if (metrics.width > maxWidth && n > 0) {
+            ctx.fillText(line.trim(), x, currY);
+            line = words[n] + " ";
+            currY += lineHeight;
+          } else {
+            line = testLine;
+          }
+        }
+        ctx.fillText(line.trim(), x, currY);
+        return currY;
+      }
+
+      // Draw realistic Wi-Fi promotional motion graphics on canvas
+      function renderCanvasFrame(nowMs) {
+        syncCanvasSize();
+        const w = canvas.width;
+        const h = canvas.height;
+        const isPortrait = h > w;
+        const t = nowMs * 0.001;
+
+        // Determine active scene (0..3) and local progress (0..1)
+        const sceneIdx = Math.min(3, Math.floor(state.elapsed / SCENE_DURATION));
+        const localT = (state.elapsed - sceneIdx * SCENE_DURATION) / SCENE_DURATION;
+        const sceneData = currentPackage.scenes[sceneIdx];
+
+        // Update UI indicators for current scene
+        sceneBadgeText.textContent = sceneData.tag;
+        activeSubtitlePreview.textContent = sceneData.subtitle;
+        timelineSlider.value = state.elapsed.toFixed(1);
+        timeElapsedEl.textContent = formatSeconds(state.elapsed);
+
+        scenePills.forEach((pill, i) => {
+          if (i === sceneIdx) {
+            pill.className =
+              "scene-pill px-2.5 py-1 rounded-full text-[11px] font-semibold bg-sky-500 text-white shadow-xs transition cursor-pointer";
+          } else {
+            pill.className =
+              "scene-pill px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition cursor-pointer";
+          }
+        });
+
+        // 1. Background Gradient & Fiber Grid
+        const bgGrad = ctx.createLinearGradient(0, 0, w, h);
+        if (sceneIdx === 0) {
+          bgGrad.addColorStop(0, "#030712");
+          bgGrad.addColorStop(0.55, "#082f49");
+          bgGrad.addColorStop(1, "#020617");
+        } else if (sceneIdx === 1) {
+          bgGrad.addColorStop(0, "#090d16");
+          bgGrad.addColorStop(0.55, "#1e1b4b");
+          bgGrad.addColorStop(1, "#020617");
+        } else if (sceneIdx === 2) {
+          bgGrad.addColorStop(0, "#042f2e");
+          bgGrad.addColorStop(0.55, "#0f172a");
+          bgGrad.addColorStop(1, "#020617");
+        } else {
+          bgGrad.addColorStop(0, "#052e16");
+          bgGrad.addColorStop(0.55, "#0f172a");
+          bgGrad.addColorStop(1, "#020617");
+        }
+        ctx.fillStyle = bgGrad;
+        ctx.fillRect(0, 0, w, h);
+
+        // Subtle technical grid
+        const gridStep = Math.max(24, Math.round(Math.min(w, h) * 0.08));
+        ctx.strokeStyle = "rgba(148, 163, 184, 0.07)";
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        const offsetX = (t * 14) % gridStep;
+        const offsetY = (t * 8) % gridStep;
+        for (let gx = -gridStep + offsetX; gx < w + gridStep; gx += gridStep) {
+          ctx.moveTo(gx, 0);
+          ctx.lineTo(gx, h);
+        }
+        for (let gy = -gridStep + offsetY; gy < h + gridStep; gy += gridStep) {
+          ctx.moveTo(0, gy);
+          ctx.lineTo(w, gy);
+        }
+        ctx.stroke();
+
+        // Animated fiber light pulses across background
+        for (let i = 0; i < 3; i++) {
+          const waveY = h * (0.22 + i * 0.24) + Math.sin(t * 2 + i) * (h * 0.03);
+          const pulseGrad = ctx.createLinearGradient(0, waveY, w, waveY);
+          pulseGrad.addColorStop(0, "rgba(56, 189, 248, 0)");
+          pulseGrad.addColorStop(0.5, "rgba(56, 189, 248, 0.25)");
+          pulseGrad.addColorStop(1, "rgba(56, 189, 248, 0)");
+          ctx.strokeStyle = pulseGrad;
+          ctx.lineWidth = Math.max(1.5, w * 0.004);
+          ctx.beginPath();
+          ctx.moveTo(0, waveY);
+          for (let px = 0; px <= w; px += 16) {
+            const py = waveY + Math.sin(px * 0.015 + t * 4 + i * 1.7) * (h * 0.02);
+            ctx.lineTo(px, py);
+          }
+          ctx.stroke();
+        }
+
+        // 2. Scene-Specific Motion Graphic Visuals
+        const centerX = w * 0.5;
+        const visualCenterY = isPortrait ? h * 0.36 : h * 0.38;
+        const baseRadius = Math.min(w, h) * (isPortrait ? 0.21 : 0.17);
+
+        if (sceneIdx === 0) {
+          // SCENE 1: Speedometer & Anti-Lag Wave Graphic
+          ctx.save();
+          // Outer gauge arc
+          ctx.beginPath();
+          ctx.arc(centerX, visualCenterY, baseRadius, Math.PI * 0.75, Math.PI * 2.25);
+          ctx.strokeStyle = "rgba(148, 163, 184, 0.22)";
+          ctx.lineWidth = Math.max(6, baseRadius * 0.13);
+          ctx.lineCap = "round";
+          ctx.stroke();
+
+          // Active speed fill animated smoothly up to 85% gauge
+          const speedFill = Math.min(1, localT * 1.5) * 0.85;
+          const startAng = Math.PI * 0.75;
+          const endAng = startAng + Math.PI * 1.5 * speedFill;
+          const gaugeGrad = ctx.createLinearGradient(centerX - baseRadius, visualCenterY, centerX + baseRadius, visualCenterY);
+          gaugeGrad.addColorStop(0, "#38bdf8");
+          gaugeGrad.addColorStop(0.6, "#22d3ee");
+          gaugeGrad.addColorStop(1, "#34d399");
+
+          ctx.beginPath();
+          ctx.arc(centerX, visualCenterY, baseRadius, startAng, endAng);
+          ctx.strokeStyle = gaugeGrad;
+          ctx.lineWidth = Math.max(6, baseRadius * 0.13);
+          ctx.lineCap = "round";
+          ctx.stroke();
+
+          // Center readout
+          const displayMbps = Math.round(Math.min(100, (localT * 1.6) * 100));
+          ctx.fillStyle = "#ffffff";
+          ctx.font = `800 ${Math.max(18, Math.round(baseRadius * 0.42))}px Inter, sans-serif`;
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText(`${displayMbps}`, centerX, visualCenterY - baseRadius * 0.05);
+
+          ctx.fillStyle = "#7dd3fc";
+          ctx.font = `700 ${Math.max(10, Math.round(baseRadius * 0.18))}px JetBrains Mono, monospace`;
+          ctx.fillText("MBPS FIBER", centerX, visualCenterY + baseRadius * 0.28);
+          ctx.restore();
+        } else if (sceneIdx === 1) {
+          // SCENE 2: Promo Badge & Monthly Value Card
+          ctx.save();
+          const pulseScale = 1 + Math.sin(t * 5) * 0.03;
+          ctx.translate(centerX, visualCenterY);
+          ctx.scale(pulseScale, pulseScale);
+
+          const cardW = Math.min(w * 0.76, baseRadius * 3.1);
+          const cardH = Math.max(64, baseRadius * 1.15);
+          ctx.fillStyle = "rgba(15, 23, 42, 0.85)";
+          ctx.strokeStyle = "rgba(129, 140, 248, 0.65)";
+          ctx.lineWidth = 2;
+          roundRect(ctx, -cardW / 2, -cardH / 2, cardW, cardH, 16);
+          ctx.fill();
+          ctx.stroke();
+
+          ctx.fillStyle = "#a5b4fc";
+          ctx.font = `700 ${Math.max(10, Math.round(cardH * 0.18))}px JetBrains Mono, monospace`;
+          ctx.textAlign = "center";
+          ctx.fillText("PROMO BULANAN SPESIAL", 0, -cardH * 0.14);
+
+          ctx.fillStyle = "#ffffff";
+          ctx.font = `800 ${Math.max(13, Math.round(cardH * 0.28))}px Inter, sans-serif`;
+          ctx.fillText(state.hargaPromo, 0, cardH * 0.22);
+          ctx.restore();
+        } else if (sceneIdx === 2) {
+          // SCENE 3: Coverage Area Radar Pins
+          ctx.save();
+          for (let r = 1; r <= 3; r++) {
+            const ringRadius = baseRadius * (0.35 + r * 0.25) + ((t * 28) % (baseRadius * 0.25));
+            const alpha = Math.max(0, 0.55 - (ringRadius / (baseRadius * 1.35)) * 0.5);
+            ctx.beginPath();
+            ctx.arc(centerX, visualCenterY, ringRadius, 0, Math.PI * 2);
+            ctx.strokeStyle = `rgba(45, 212, 191, ${alpha.toFixed(2)})`;
+            ctx.lineWidth = 2;
+            ctx.stroke();
+          }
+
+          // Center pin
+          ctx.beginPath();
+          ctx.arc(centerX, visualCenterY, Math.max(8, baseRadius * 0.16), 0, Math.PI * 2);
+          ctx.fillStyle = "#2dd4bf";
+          ctx.fill();
+          ctx.lineWidth = 3;
+          ctx.strokeStyle = "#042f2e";
+          ctx.stroke();
+
+          ctx.fillStyle = "#99f6e4";
+          ctx.font = `700 ${Math.max(10, Math.round(baseRadius * 0.2))}px JetBrains Mono, monospace`;
+          ctx.textAlign = "center";
+          ctx.fillText("COVERAGE AKTIF", centerX, visualCenterY + baseRadius * 0.52);
+          ctx.restore();
+        } else {
+          // SCENE 4: WhatsApp Registration CTA Pulse
+          ctx.save();
+          const ctaScale = 1 + Math.sin(t * 6) * 0.04;
+          ctx.translate(centerX, visualCenterY);
+          ctx.scale(ctaScale, ctaScale);
+
+          const btnW = Math.min(w * 0.78, baseRadius * 3.2);
+          const btnH = Math.max(58, baseRadius * 0.95);
+          const btnGrad = ctx.createLinearGradient(-btnW / 2, 0, btnW / 2, 0);
+          btnGrad.addColorStop(0, "#10b981");
+          btnGrad.addColorStop(1, "#059669");
+
+          ctx.fillStyle = btnGrad;
+          roundRect(ctx, -btnW / 2, -btnH / 2, btnW, btnH, 14);
+          ctx.fill();
+
+          ctx.fillStyle = "#ffffff";
+          ctx.font = `800 ${Math.max(12, Math.round(btnH * 0.3))}px Inter, sans-serif`;
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText("CHAT & DAFTAR VIA WA", 0, 0);
+          ctx.restore();
+        }
+
+        // 3. Lower Editorial Typography Overlay (Headline, Subheadline & Area)
+        const textTopY = isPortrait ? h * 0.58 : h * 0.62;
+        const maxTextW = w * 0.86;
+        ctx.textAlign = "center";
+
+        // Headline
+        const headlineSize = isPortrait
+          ? Math.max(16, Math.round(w * 0.058))
+          : Math.max(18, Math.round(h * 0.068));
+        ctx.fillStyle = "#ffffff";
+        ctx.font = `800 ${headlineSize}px Inter, sans-serif`;
+        const afterHeadlineY = drawWrappedText(
+          sceneData.headline,
+          centerX,
+          textTopY,
+          maxTextW,
+          headlineSize * 1.2
+        );
+
+        // Subheadline
+        const subSize = Math.max(11, Math.round(headlineSize * 0.62));
+        ctx.fillStyle = "#bae6fd";
+        ctx.font = `600 ${subSize}px Inter, sans-serif`;
+        const afterSubY = drawWrappedText(
+          sceneData.subheadline,
+          centerX,
+          afterHeadlineY + subSize * 1.25,
+          maxTextW,
+          subSize * 1.25
+        );
+
+        // Footer Area & WA Strip
+        const footerSize = Math.max(10, Math.round(subSize * 0.85));
+        ctx.fillStyle = "rgba(226, 232, 240, 0.85)";
+        ctx.font = `500 ${footerSize}px JetBrains Mono, monospace`;
+        drawWrappedText(
+          `📍 ${state.areaCoverage}`,
+          centerX,
+          afterSubY + footerSize * 1.4,
+          maxTextW,
+          footerSize * 1.25
+        );
+
+        // Progress bar along very bottom edge of canvas
+        const progressRatio = Math.min(1, state.elapsed / TOTAL_DURATION);
+        ctx.fillStyle = "rgba(255, 255, 255, 0.12)";
+        ctx.fillRect(0, h - 5, w, 5);
+        ctx.fillStyle = "#38bdf8";
+        ctx.fillRect(0, h - 5, w * progressRatio, 5);
+      }
+
+      function roundRect(context, x, y, width, height, radius) {
+        const r = Math.min(radius, width / 2, height / 2);
+        context.beginPath();
+        context.moveTo(x + r, y);
+        context.arcTo(x + width, y, x + width, y + height, r);
+        context.arcTo(x + width, y + height, x, y + height, r);
+        context.arcTo(x, y + height, x, y, r);
+        context.arcTo(x, y, x + width, y, r);
+        context.closePath();
+      }
+
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      // Main Animation Loop
+      let lastFrameTime = performance.now();
+
+      function tick(nowMs) {
+        const dt = Math.min(0.1, (nowMs - lastFrameTime) / 1000);
+        lastFrameTime = nowMs;
+
+        if (state.isPlaying) {
+          state.elapsed += dt;
+          if (state.elapsed >= TOTAL_DURATION) {
+            state.elapsed = 0; // Seamless loop
+          }
+        }
+
+        renderCanvasFrame(nowMs);
+        requestAnimationFrame(tick);
+      }
+
+      // Initial render
+      renderContentSections();
+      requestAnimationFrame(tick);
+    })();
+  </script>
+</body>
+</html>
